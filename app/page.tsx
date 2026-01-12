@@ -17,4 +17,5 @@ export default function Page() {
       const [showLandmarks, setShowLandmarks] = useState(false)
       const [gestureDetected, setGestureDetected] = useState("idle")
       const [handPosition, setHandPosition] = useState({ x: 0.5, y: 0.5 })
+      const [sensitivity, setSensitivity] = useState(50)
 }
