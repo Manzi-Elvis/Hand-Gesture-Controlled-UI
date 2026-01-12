@@ -21,4 +21,5 @@ export default function Page() {
       const [volume, setVolume] = useState(70)
       const [settingsOpen, setSettingsOpen] = useState(false)
       const [cursorVisible, setCursorVisible] = useState(true)
+      const rafThrottler = useRef(createRAFThrottler())
 }
