@@ -26,8 +26,8 @@ export default function Page() {
       const { videoRef } = useCamera(cameraActive)
 
       const { handleGesture } = useGestureDetector({
-    onGestureChange: setGestureDetected,
-    onPositionChange: setHandPosition,
-    throttleMs: 16, // 60fps
-  })
+            onGestureChange: setGestureDetected,
+            onPositionChange: setHandPosition,
+            throttleMs: 16, // 60fps
+      })
 }
