@@ -31,4 +31,27 @@ export default function Page() {
             throttleMs: 16, // 60fps
       })
       // Simulate gesture detection with throttling
+      useEffect(() => {
+            if (!cameraActive) return
+
+            const interval = setInterval(() => {
+            const gestures = ["pinch", "open_palm", "swipe_left", "swipe_right", "closed_fist", "idle"]
+            const gesture = gestures[Math.floor(Math.random() * gestures.length)]
+            const position = {
+            x: Math.random() * 0.6 + 0.2, // Keep between 20-80% horizontally
+            y: Math.random() * 0.4 + 0.3, // Keep between 30-70% vertically
+      }
+
+      console.log("Setting gesture:", gesture, "position:", position)
+
+      // Use throttler for performance
+      rafThrottler.current(() => {
+        handleGesture(gesture, position)
+        setHandPosition(position)
+      })
+    }, 500)
+
+    return () => clearInterval(interval)
+  }, [cameraActive, handleGesture])
+
 }
