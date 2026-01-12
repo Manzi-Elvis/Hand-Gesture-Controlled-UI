@@ -18,4 +18,6 @@ export default function Page() {
       const [gestureDetected, setGestureDetected] = useState("idle")
       const [handPosition, setHandPosition] = useState({ x: 0.5, y: 0.5 })
       const [sensitivity, setSensitivity] = useState(50)
+      const [volume, setVolume] = useState(70)
+      const [settingsOpen, setSettingsOpen] = useState(false)
 }
