@@ -20,4 +20,5 @@ export default function Page() {
       const [sensitivity, setSensitivity] = useState(50)
       const [volume, setVolume] = useState(70)
       const [settingsOpen, setSettingsOpen] = useState(false)
+      const [cursorVisible, setCursorVisible] = useState(true)
 }
