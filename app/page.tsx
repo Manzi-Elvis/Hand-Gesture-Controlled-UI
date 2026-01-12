@@ -11,3 +11,7 @@ import { useGestureDetector } from "@/hooks/use-gesture-detector"
 import { useCamera } from "@/hooks/use-camera"
 import { createRAFThrottler } from "@/lib/performance-utils"
 import { Eye, EyeOff, Volume2, Settings, Zap } from "lucide-react"
+
+export default function Page() {
+      const [camerActive, setCameraActive] = useState(false)
+}
