@@ -14,4 +14,5 @@ import { Eye, EyeOff, Volume2, Settings, Zap } from "lucide-react"
 
 export default function Page() {
       const [camerActive, setCameraActive] = useState(false)
+      const [showLandmarks, setShowLandmarks] = useState(false)
 }
