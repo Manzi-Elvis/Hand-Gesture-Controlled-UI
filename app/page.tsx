@@ -30,4 +30,5 @@ export default function Page() {
             onPositionChange: setHandPosition,
             throttleMs: 16, // 60fps
       })
+      // Simulate gesture detection with throttling
 }
