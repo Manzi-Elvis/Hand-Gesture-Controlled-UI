@@ -24,4 +24,10 @@ export default function Page() {
       const rafThrottler = useRef(createRAFThrottler())
 
       const { videoRef } = useCamera(cameraActive)
+
+      const { handleGesture } = useGestureDetector({
+    onGestureChange: setGestureDetected,
+    onPositionChange: setHandPosition,
+    throttleMs: 16, // 60fps
+  })
 }
