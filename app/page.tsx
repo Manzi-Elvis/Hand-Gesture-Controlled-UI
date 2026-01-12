@@ -1,4 +1,5 @@
 "use client"
+
 import { useState, useEffect, useCallback, useRef } from "react"
 import { CameraFeed } from "@/components/camera-feed"
 import { GestureGuide } from "@/components/gesture-guide"
@@ -9,3 +10,4 @@ import { OptimizedHandCursor } from "@/components/optimized-hand-cursor"
 import { useGestureDetector } from "@/hooks/use-gesture-detector"
 import { useCamera } from "@/hooks/use-camera"
 import { createRAFThrottler } from "@/lib/performance-utils"
+import { Eye, EyeOff, Volume2, Settings, Zap } from "lucide-react"
