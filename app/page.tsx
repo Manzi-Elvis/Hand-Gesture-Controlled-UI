@@ -64,7 +64,13 @@ export default function Page() {
       }, [])
       return (
             <main className={`min-h-screen bg-background text-foreground ${cursorVisible ? "hand-cursor" : ""}`}>
-
+                  {/* Optimized hand cursor with memoization */}
+                  <OptimizedHandCursor
+                        x={handPosition.x}
+                        y={handPosition.y}
+                        gesture={gestureDetected}
+                        isVisible={cursorVisible && camerActive}
+                  />
             </main>
       )
 
