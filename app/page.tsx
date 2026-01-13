@@ -71,6 +71,33 @@ export default function Page() {
                         gesture={gestureDetected}
                         isVisible={cursorVisible && camerActive}
                   />
+                  {/* Header with sticky positioning */}
+                  <div className="sticky top-0 z-40 backdrop-blur-xl bg-background/40 border-b border-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+          <div>
+            <div className="flex items-center gap-2">
+              <Zap size={20} className="text-primary" />
+              <h1 className="text-2xl font-bold">Hand Gesture UI</h1>
+            </div>
+            <p className="text-xs text-muted-foreground mt-1">Premium gesture-controlled interface</p>
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setCameraActive(!cameraActive)}
+              className="glass px-3 py-2 rounded-lg hover:bg-primary/20 smooth-transition flex items-center gap-2"
+            >
+              <Volume2 size={16} />
+              <span className="text-sm">{volume}%</span>
+            </button>
+            <button
+              onClick={handleSettingsToggle}
+              className="glass px-3 py-2 rounded-lg hover:bg-primary/20 smooth-transition"
+            >
+              <Settings size={16} />
+            </button>
+          </div>
+        </div>
+      </div>
             </main>
       )
 
