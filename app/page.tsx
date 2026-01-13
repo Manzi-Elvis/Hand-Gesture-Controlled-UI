@@ -62,5 +62,10 @@ export default function Page() {
       const handleSettingsToggle = useCallback(() => {
             setSettingsOpen((prev) => !prev)
       }, [])
+      return (
+            <main className={`min-h-screen bg-background text-foreground ${cursorVisible ? "hand-cursor" : ""}`}>
+
+            </main>
+      )
 
 }
