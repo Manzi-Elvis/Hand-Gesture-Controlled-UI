@@ -53,11 +53,14 @@ export default function Page() {
 
             return () => clearInterval(interval)
       }, [cameraActive, handleGesture])
-      
+
       const carouselItems = [
             { id: "1", title: "Visual Pro", color: "bg-gradient-to-br from-blue-500/20 to-cyan-500/20" },
             { id: "2", title: "Gesture Control", color: "bg-gradient-to-br from-purple-500/20 to-pink-500/20" },
             { id: "3", title: "Premium Design", color: "bg-gradient-to-br from-orange-500/20 to-red-500/20" },
       ]
+      const handleSettingsToggle = useCallback(() => {
+            setSettingsOpen((prev) => !prev)
+      }, [])
 
 }
