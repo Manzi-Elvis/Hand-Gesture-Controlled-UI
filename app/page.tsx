@@ -23,7 +23,7 @@ export default function Page() {
       const [cursorVisible, setCursorVisible] = useState(true)
       const rafThrottler = useRef(createRAFThrottler())
 
-      const { videoRef } = useCamera(cameraActive)
+      const { videoRef } = useCamera(camerActive)
 
       const { handleGesture } = useGestureDetector({
             onGestureChange: setGestureDetected,
@@ -32,7 +32,7 @@ export default function Page() {
       })
       // Simulate gesture detection with throttling
       useEffect(() => {
-            if (!cameraActive) return
+            if (!camerActive) return
 
             const interval = setInterval(() => {
                   const gestures = ["pinch", "open_palm", "swipe_left", "swipe_right", "closed_fist", "idle"]
@@ -52,7 +52,7 @@ export default function Page() {
             }, 500)
 
             return () => clearInterval(interval)
-      }, [cameraActive, handleGesture])
+      }, [camerActive, handleGesture])
 
       const carouselItems = [
             { id: "1", title: "Visual Pro", color: "bg-gradient-to-br from-blue-500/20 to-cyan-500/20" },
@@ -83,7 +83,7 @@ export default function Page() {
           </div>
           <div className="flex items-center gap-2">
             <button
-              onClick={() => setCameraActive(!cameraActive)}
+              onClick={() => setCameraActive(!camerActive)}
               className="glass px-3 py-2 rounded-lg hover:bg-primary/20 smooth-transition flex items-center gap-2"
             >
               <Volume2 size={16} />
@@ -97,6 +97,142 @@ export default function Page() {
             </button>
           </div>
         </div>
+      </div>
+      {/* Main content */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+        {/* Hero section */}
+        <section className="text-center space-y-4">
+          <h2 className="text-4xl font-bold">Control with Your Hands</h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Experience a premium, gesture-controlled interface powered by advanced hand tracking. Move, pinch, and swipe
+            to interact with UI elements.
+          </p>
+        </section>
+
+        {/* Camera feed and controls */}
+        <section className="space-y-4">
+          <div className="flex items-center justify-between">
+            <h3 className="text-lg font-semibold">Live Demo</h3>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setCameraActive(!camerActive)}
+                className="glass px-3 py-2 rounded-lg hover:bg-primary/20 smooth-transition flex items-center gap-2"
+              >
+                {camerActive ? <Eye size={16} /> : <EyeOff size={16} />}
+                <span className="text-sm">{camerActive ? "Stop Camera" : "Start Camera"}</span>
+              </button>
+              <button
+                onClick={() => setShowLandmarks(!showLandmarks)}
+                className={`glass px-3 py-2 rounded-lg smooth-transition flex items-center gap-2 ${
+                  showLandmarks ? "bg-primary/20" : "hover:bg-primary/20"
+                }`}
+              >
+                <span className="text-sm">{showLandmarks ? "Hide" : "Show"} Landmarks</span>
+              </button>
+            </div>
+          </div>
+          <CameraFeed isActive={camerActive} showLandmarks={showLandmarks} />
+        </section>
+
+        {/* Gesture guide */}
+        <section>
+          <GestureGuide />
+        </section>
+
+        {/* Interactive components */}
+        <section className="space-y-6">
+          <h3 className="text-lg font-semibold">Interactive Components</h3>
+
+          {/* Carousel */}
+          <div className="space-y-3">
+            <p className="text-sm text-muted-foreground">Gesture Carousel - Swipe to navigate</p>
+            <GestureCarousel items={carouselItems} gestureDetected={gestureDetected} />
+          </div>
+
+          {/* Buttons */}
+          <div className="space-y-3">
+            <p className="text-sm text-muted-foreground">Gesture Buttons - Pinch to activate</p>
+            <div className="flex flex-wrap gap-4">
+              <GestureButton
+                label="Confirm"
+                onClick={() => console.log("Confirmed")}
+                isHovered={gestureDetected === "pinch"}
+              />
+              <GestureButton
+                label="Select"
+                onClick={() => console.log("Selected")}
+                isHovered={gestureDetected === "pinch"}
+              />
+              <GestureButton
+                label="Submit"
+                onClick={() => console.log("Submitted")}
+                isHovered={gestureDetected === "pinch"}
+              />
+            </div>
+          </div>
+
+          {/* Sliders */}
+          <div className="space-y-6">
+            <p className="text-sm text-muted-foreground">Gesture Sliders - Move hand horizontally</p>
+            <div className="glass rounded-xl p-6 space-y-6">
+              <GestureSlider
+                label="Sensitivity"
+                value={sensitivity}
+                onChange={setSensitivity}
+                handPosition={handPosition}
+                isActive={gestureDetected === "closed_fist"}
+              />
+              <GestureSlider
+                label="Volume"
+                value={volume}
+                onChange={setVolume}
+                handPosition={handPosition}
+                isActive={gestureDetected === "closed_fist"}
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* Settings panel */}
+        {settingsOpen && (
+          <section className="glass rounded-xl p-6 space-y-4 smooth-transition">
+            <h3 className="font-semibold flex items-center gap-2">
+              <Settings size={16} /> Settings
+            </h3>
+            <div className="space-y-4">
+              <label className="flex items-center gap-3 cursor-pointer hover:bg-white/5 p-2 rounded smooth-transition">
+                <input
+                  type="checkbox"
+                  checked={cursorVisible}
+                  onChange={(e) => setCursorVisible(e.target.checked)}
+                  className="w-4 h-4 rounded accent-primary"
+                />
+                <span className="text-sm">Show hand cursor</span>
+              </label>
+              <label className="flex items-center gap-3 cursor-pointer hover:bg-white/5 p-2 rounded smooth-transition">
+                <input
+                  type="checkbox"
+                  checked={showLandmarks}
+                  onChange={(e) => setShowLandmarks(e.target.checked)}
+                  className="w-4 h-4 rounded accent-primary"
+                />
+                <span className="text-sm">Show hand landmarks</span>
+              </label>
+              <div className="pt-2 border-t border-border">
+                <p className="text-xs text-muted-foreground">
+                  Gesture Detection: <span className="text-primary">{gestureDetected}</span>
+                </p>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Footer */}
+        <section className="text-center py-8 border-t border-border">
+          <p className="text-xs text-muted-foreground">
+            Built with MediaPipe Hands • Gesture-controlled UI • Premium Design • Optimized Performance
+          </p>
+        </section>
       </div>
             </main>
       )
